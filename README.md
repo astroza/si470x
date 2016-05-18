@@ -31,6 +31,6 @@ To fix this, what I did was cold start:
 
 And I deleted any interruptions related code 0:) (sadly, RDS support is not working).
 ## References
-- Olinuxino Lime User Manual:
-- A20 datasheet
-- SI470x Programming Guide: http://cdn.sparkfun.com/datasheets/BreakoutBoards/AN230.pdf
+- [1] Olinuxino Lime User Manual:
+- [2] A20 datasheet
+- [3] SI470x Programming Guide: http://cdn.sparkfun.com/datasheets/BreakoutBoards/AN230.pdf
