@@ -45,10 +45,11 @@ Later, you can tune any FM radio frequency via /dev/radio0 V4L2 interface. The p
 ### Audio capturing
 ![sunxi codec](https://github.com/astroza/si470x/blob/master/doc/codec.png)
 
-Diagram above says first value ADCIS=1 corresponds to FMin. ALSA sunxi codec driver has a control "ADC Input Mux" to select the audio source for capturing, configured as a 7 state percentage bar. If 100/7=˜14, the first value in the bar (14) is for FMin.
+Diagram above [2] says first value ADCIS=1 corresponds to FMin. ALSA sunxi codec driver has a control "ADC Input Mux" to select the audio source for capturing, configured as a 7 state percentage bar. If 100/7=˜14, the first value in the bar (14) is for FMin.
 ![sunxi codec](https://github.com/astroza/si470x/blob/master/doc/alsa.png)
 
 Finally!, you can test the radio output:
+
 **Terminal 1**
 ```bash
 arecord -D hw:0,0 -c 2 -V stereo /dev/null
@@ -58,6 +59,6 @@ arecord -D hw:0,0 -c 2 -V stereo /dev/null
 fm -d /dev/radio0 -t 0 -T forever 89.70 100%
 ```
 ## References
-- [1] Olinuxino Lime User Manual:
-- [2] A20 datasheet
-- [3] SI470x Programming Guide: http://cdn.sparkfun.com/datasheets/BreakoutBoards/AN230.pdf
+- [1] Olinuxino Lime User Manual: https://www.olimex.com/Products/OLinuXino/A20/A20-OLinuXino-LIME/resources/a20-olinuxino-lime-um.pdf
+- [2] A20 datasheet: http://dl.linux-sunxi.org/A20/A20%20Brief%202013-02-27.pdf
+- [3] SI470x Programming Guide:http://cdn.sparkfun.com/datasheets/BreakoutBoards/AN230.pdf
