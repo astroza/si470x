@@ -43,6 +43,7 @@ Once you install the modified driver, you can load it as follows:
 Later, you can tune any FM radio frequency via /dev/radio0 V4L2 interface. The project http://benpfaff.org/fmtools/ is useful for you here.
 
 ### Audio capturing
+![sunxi codec](https://github.com/astroza/si470x/blob/master/doc/codec.png)
 
 ALSA Sunxi codec driver has a control "ADC Input Mux" to select the audio source for capturing. 
 ## References
