@@ -40,6 +40,8 @@ Once you install the modified driver, you can load it as follows:
 ```
 > **reset_tuner_si470x** is a program included in this repository. If you want to know how the **last line** works, please check https://www.kernel.org/doc/Documentation/i2c/instantiating-devices.
 
+> 0x10 is the i2c device address. You can get it with **i2cdetect -y 2** command.
+
 Later, you can tune any FM radio frequency via /dev/radio0 V4L2 interface. The project http://benpfaff.org/fmtools/ is useful for you here.
 
 ### Audio capturing
