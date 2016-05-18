@@ -37,7 +37,7 @@ Once you install the modified driver, you can load as follows:
 	modprobe radio_i2c_si470x
 	echo "si470x 0x10" > /sys/bus/i2c/devices/i2c-2/new_device
 ```
-reset_tuner_si470x is a program included in this repository. If you want to know how the last line works, please see https://www.kernel.org/doc/Documentation/i2c/instantiating-devices .
+> **reset_tuner_si470x** is a program included in this repository. If you want to know how the **last line** works, please check https://www.kernel.org/doc/Documentation/i2c/instantiating-devices .
 
 
 ## References
