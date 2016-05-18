@@ -21,7 +21,7 @@ Also, I removed R8 and R3 resistors from Sparkfun breakout because Olinuxino boa
 ## Software
 The untouched kernel driver does not work because:
 * There is no defined IRQ for the device
-* The initialization routine leave the chip in a undefined state.
+* The initialization routine leave the chip in an undefined state.
 
 To fix this, what I did was cold start:
 * Power down the chip with ENABLE|DISABLE flags (according to page 5 [3])
@@ -29,7 +29,17 @@ To fix this, what I did was cold start:
 * Wait (500 ms)
 * Enable the chip again
 
-And I deleted any interruptions related code 0:) (sadly, RDS support is not working).
+And I deleted any interruptions related code 0:) (sadly RDS support is not working).
+
+Once you install the modified driver, you can load as follows:
+```
+	reset_tuner_si470x
+	modprobe radio_i2c_si470x
+	echo "si470x 0x10" > /sys/bus/i2c/devices/i2c-2/new_device
+```
+reset_tuner_si470x is a program included in this repository. If you want to know how the last line works, please see https://www.kernel.org/doc/Documentation/i2c/instantiating-devices .
+
+
 ## References
 - [1] Olinuxino Lime User Manual:
 - [2] A20 datasheet
