@@ -17,7 +17,7 @@ This project is about interfacing SI470X with A20 SoC (Olinuxino LIME). The unus
  |           |- RST --------------------- PC18 -|               |
  |-----------|                                  |---------------|
 ```
-Also, **I removed R8 and R3 resistors** from Sparkfun breakout because Olinuxino board already has built-in open drain pull up resistors [1].
+Also, **I removed R8 and R3 resistors** from Sparkfun breakout [4] because Olinuxino board already has built-in open drain pull up resistors [1].
 
 ## Software
 The untouched kernel driver does not work because:
@@ -64,3 +64,4 @@ fm -d /dev/radio0 -t 0 -T forever 89.70 100%
 - [1] Olinuxino Lime User Manual: https://www.olimex.com/Products/OLinuXino/A20/A20-OLinuXino-LIME/resources/a20-olinuxino-lime-um.pdf
 - [2] A20 datasheet: http://dl.linux-sunxi.org/A20/A20%20Brief%202013-02-27.pdf
 - [3] SI470x Programming Guide:http://cdn.sparkfun.com/datasheets/BreakoutBoards/AN230.pdf
+- [4] Breakout Schematic: http://cdn.sparkfun.com/datasheets/Wireless/General/Si470x-breakout-v13_fix_2.pdf
