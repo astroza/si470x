@@ -33,7 +33,7 @@ To fix this, what I did was cold start:
 And also, I deleted any interruptions related code 0:) (sadly RDS support is not working).
 
 Once you install the modified driver, you can load it as follows:
-```
+```bash
 	reset_tuner_si470x
 	modprobe radio_i2c_si470x
 	echo "si470x 0x10" > /sys/bus/i2c/devices/i2c-2/new_device
@@ -44,9 +44,19 @@ Later, you can tune any FM radio frequency via /dev/radio0 V4L2 interface. The p
 
 ### Audio capturing
 ![sunxi codec](https://github.com/astroza/si470x/blob/master/doc/codec.png)
-[2] Input muxing diagram
 
-ALSA Sunxi codec driver has a control "ADC Input Mux" to select the audio source for capturing. 
+Diagram above says first value ADCIS=1 corresponds to FMin. ALSA sunxi codec driver has a control "ADC Input Mux" to select the audio source for capturing, configured as a 7 state percentage bar. If 100/7=˜14, the first value in the bar (14) is for FMin.
+![sunxi codec](https://github.com/astroza/si470x/blob/master/doc/alsa.png)
+
+Finally!, you can test the radio output:
+**Terminal 1**
+```bash
+arecord -D hw:0,0 -c 2 -V stereo /dev/null
+```
+**Terminal 2**
+```bash
+fm -d /dev/radio0 -t 0 -T forever 89.70 100%
+```
 ## References
 - [1] Olinuxino Lime User Manual:
 - [2] A20 datasheet
