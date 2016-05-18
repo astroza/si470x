@@ -17,7 +17,7 @@ This project is about interfacing SI470X with A20 SoC (Olinuxino LIME). The unus
  |           |- RST --------------------- PC18 -|               |
  |-----------|                                  |---------------|
 ```
-Also, I removed R8 and R3 resistors from Sparkfun breakout because Olinuxino board already has built-in open drain pull up resistors [1].
+Also, **I removed R8 and R3 resistors** from Sparkfun breakout because Olinuxino board already has built-in open drain pull up resistors [1].
 
 ## Software
 The untouched kernel driver does not work because:
