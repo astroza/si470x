@@ -143,9 +143,9 @@ module_param(de, ushort, 0444);
 MODULE_PARM_DESC(de, "De-emphasis: 0=75us *1=50us*");
 
 /* Tune timeout */
-static unsigned int tune_timeout = 3000;
+static unsigned int tune_timeout = 5000;
 module_param(tune_timeout, uint, 0644);
-MODULE_PARM_DESC(tune_timeout, "Tune timeout: *3000*");
+MODULE_PARM_DESC(tune_timeout, "Tune timeout: *5000*");
 
 /* Seek timeout */
 static unsigned int seek_timeout = 5000;
@@ -187,6 +187,7 @@ static int si470x_set_chan(struct si470x_device *radio, unsigned short chan)
 		/* wait till tune operation has completed */
 		timeout = jiffies + msecs_to_jiffies(tune_timeout);
 		do {
+			dev_warn(&radio->videodev->dev, "Waiting tune response\n");
 			retval = si470x_get_register(radio, STATUSRSSI);
 			if (retval < 0)
 				goto stop;
@@ -373,6 +374,7 @@ int si470x_start(struct si470x_device *radio)
 {
 	int retval;
 
+	dev_warn(&radio->videodev->dev, "si470x_start\n");
 	/* powercfg */
 	radio->registers[POWERCFG] =
 		POWERCFG_DMUTE | POWERCFG_ENABLE | POWERCFG_RDSM;

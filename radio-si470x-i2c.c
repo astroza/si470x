@@ -385,14 +385,31 @@ static int __devinit si470x_i2c_probe(struct i2c_client *client,
 			sizeof(si470x_viddev_template));
 	video_set_drvdata(radio->videodev, radio);
 
-	/* power up : need 110ms */
-	radio->registers[POWERCFG] = POWERCFG_ENABLE;
+        if (si470x_get_all_registers(radio) < 0) {
+                retval = -EIO;
+                goto err_video;
+        }
+
+        radio->registers[TEST1] |= TEST1_XOSCEN;
+        if (si470x_set_register(radio, TEST1) < 0) {
+                retval = -EIO;
+                goto err_video;
+        }
+        msleep(500);
+	/* Needed for cold starting */
+	radio->registers[POWERCFG] = POWERCFG_DISABLE | POWERCFG_ENABLE;
 	if (si470x_set_register(radio, POWERCFG) < 0) {
 		retval = -EIO;
 		goto err_video;
 	}
 	msleep(110);
-
+        /* Enable the chip */
+        radio->registers[POWERCFG] = POWERCFG_ENABLE;
+        if (si470x_set_register(radio, POWERCFG) < 0) {
+                retval = -EIO;
+                goto err_video;
+        }
+	msleep(110);
 	/* get device and chip versions */
 	if (si470x_get_all_registers(radio) < 0) {
 		retval = -EIO;
@@ -436,15 +453,8 @@ static int __devinit si470x_i2c_probe(struct i2c_client *client,
 	init_waitqueue_head(&radio->read_queue);
 
 	/* mark Seek/Tune Complete Interrupt enabled */
-	radio->stci_enabled = true;
-	init_completion(&radio->completion);
-
-	retval = request_threaded_irq(client->irq, NULL, si470x_i2c_interrupt,
-			IRQF_TRIGGER_FALLING, DRIVER_NAME, radio);
-	if (retval) {
-		dev_err(&client->dev, "Failed to register interrupt\n");
-		goto err_rds;
-	}
+	// radio->stci_enabled = true;
+	// init_completion(&radio->completion);
 
 	/* register video device */
 	retval = video_register_device(radio->videodev, VFL_TYPE_RADIO,
@@ -457,7 +467,6 @@ static int __devinit si470x_i2c_probe(struct i2c_client *client,
 
 	return 0;
 err_all:
-	free_irq(client->irq, radio);
 err_rds:
 	kfree(radio->buffer);
 err_video:
@@ -476,7 +485,6 @@ static __devexit int si470x_i2c_remove(struct i2c_client *client)
 {
 	struct si470x_device *radio = i2c_get_clientdata(client);
 
-	free_irq(client->irq, radio);
 	video_unregister_device(radio->videodev);
 	kfree(radio);
 

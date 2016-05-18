@@ -95,6 +95,7 @@
 #define SYSCONFIG3_SKCNT	0x000f	/* bits 03..00: Seek FM Impulse Detection Threshold */
 
 #define TEST1			7	/* Test 1 */
+#define TEST1_XOSCEN		0x8000
 #define TEST1_AHIZEN		0x4000	/* bits 14..14: Audio High-Z Enable */
 
 #define TEST2			8	/* Test 2 */
