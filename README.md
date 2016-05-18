@@ -26,10 +26,10 @@ The untouched kernel driver does not work because:
 To fix this, what I did was cold start:
 * Power down the chip with ENABLE|DISABLE flags (according to page 5 [3])
 * Set external crystal
-* Wait (500 ms)
+* Wait 500 ms for calibration
 * Enable the chip again
 
-And I deleted any interruptions related code 0:) (sadly RDS support is not working).
+And also, I deleted any interruptions related code 0:) (sadly RDS support is not working).
 
 Once you install the modified driver, you can load as follows:
 ```
@@ -37,7 +37,7 @@ Once you install the modified driver, you can load as follows:
 	modprobe radio_i2c_si470x
 	echo "si470x 0x10" > /sys/bus/i2c/devices/i2c-2/new_device
 ```
-> **reset_tuner_si470x** is a program included in this repository. If you want to know how the **last line** works, please check https://www.kernel.org/doc/Documentation/i2c/instantiating-devices .
+> **reset_tuner_si470x** is a program included in this repository. If you want to know how the **last line** works, please check https://www.kernel.org/doc/Documentation/i2c/instantiating-devices.
 
 
 ## References
