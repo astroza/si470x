@@ -44,6 +44,7 @@ Later, you can tune any FM radio frequency via /dev/radio0 V4L2 interface. The p
 
 ### Audio capturing
 ![sunxi codec](https://github.com/astroza/si470x/blob/master/doc/codec.png)
+[2] Input muxing diagram
 
 ALSA Sunxi codec driver has a control "ADC Input Mux" to select the audio source for capturing. 
 ## References
