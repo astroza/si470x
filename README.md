@@ -31,7 +31,7 @@ To fix this, what I did was cold start:
 
 And also, I deleted any interruptions related code 0:) (sadly RDS support is not working).
 
-Once you install the modified driver, you can load as follows:
+Once you install the modified driver, you can load it as follows:
 ```
 	reset_tuner_si470x
 	modprobe radio_i2c_si470x
@@ -39,7 +39,11 @@ Once you install the modified driver, you can load as follows:
 ```
 > **reset_tuner_si470x** is a program included in this repository. If you want to know how the **last line** works, please check https://www.kernel.org/doc/Documentation/i2c/instantiating-devices.
 
+Later, you can tune any FM radio frequency via /dev/radio0 V4L2 interface. The project http://benpfaff.org/fmtools/ is useful for you here.
 
+### Audio capturing
+
+ALSA Sunxi codec driver has a control "ADC Input Mux" to select the audio source for capturing. 
 ## References
 - [1] Olinuxino Lime User Manual:
 - [2] A20 datasheet
